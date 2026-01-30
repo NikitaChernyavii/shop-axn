@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;600&display=swap');
 
-
+/* --- ОБЩИЕ СТИЛИ --- */
 * {
     margin: 0;
     padding: 0;
@@ -8,166 +8,293 @@
 }
 
 body {
-    background-color: white;
+    background-color: #ffffff;
     color: #222;
-    font-family: 'Montserrat Alternates', 'sans-serif';
+    font-family: 'Montserrat Alternates', sans-serif;
     font-weight: 300;
-
 }
 
 .wrapper {
-    max-width: 1280px ;
+    max-width: 1280px;
     width: 90%;
-    margin: 50px auto;
-
-
+    margin: 0 auto;
 }
 
+/* --- ШАПКА (HEADER) --- */
+header {
+    position: relative;
+    padding-top: 30px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 20px;
+}
 
 header .logo {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 35px;
+    cursor: default;
 }
-
 
 header ul.nav {
-    float: right;
+    display: flex;
+    align-items: center;
     list-style: none;
-
 }
 
-header ul.nav li{
-    display: inline;
-    margin-left: 25px;
+header ul.nav li {
+    margin-left: 30px;
+    font-weight: 600;
     cursor: pointer;
-    transition: opacity 500ms ease;
+    transition: color 400ms ease;
 }
 
 header ul.nav li:hover {
-    opacity: 0.5;
-
+    color: #ff8888;
 }
 
-header .presentation {
-    margin: 50px 0;
-    background: url('./img/bg.jpg') no-repeat;
+/* Иконка корзины */
+header .shop-bag-button {
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 400ms ease, color 400ms ease;
+}
+
+header .shop-bag-button:hover,
+header .shop-bag-button.active {
+    color: #ff8888;
+    transform: scale(1.1);
+}
+
+/* --- ВЫПАДАЮЩАЯ КОРЗИНА --- */
+header .shop-bag {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 400px;
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    z-index: 1000;
+    padding: 25px;
+}
+
+header .shop-bag .empty h2 {
+    font-size: 18px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header .shop-bag .item {
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 500px;
-    background-size: cover;
-    background-position: center center;
-    background-blend-mode:  multiply;
-    background-color: rgb(255, 225, 181);
-    position: relative;
-    border-radius: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
+header .shop-bag .item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+header .shop-bag .item h2 {
+    font-size: 16px;
+    flex: 1;
+}
+
+header .shop-bag .item b {
+    color: #555;
+    margin-right: 15px;
+}
+
+header .shop-bag .item .delete-icon {
+    color: #ff8888;
+    cursor: pointer;
+    transition: transform 300ms ease;
+}
+
+header .shop-bag .item .delete-icon:hover {
+    transform: scale(1.2);
+}
+
+header .shop-bag .summa {
+    display: block;
+    width: 100%;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+/* --- БАННЕР (PRESENTATION) --- */
+header .presentation {
+    margin: 30px 0;
+    background: url('./img/bg.jpg') no-repeat center center/cover;
+    width: 100%;
+    height: 450px;
+    border-radius: 25px;
+    position: relative;
+}
 
 header .presentation::after {
     content: "The Best One";
     position: absolute;
-    top: 100px;
+    top: 80px;
     left: 50px;
     width: 300px;
     font-size: 40px;
     font-weight: 600;
-    color: aliceblue;
+    color: #333;
 }
 
-
-header .presentation::before {
-    content: "Choose your!";
-    position: absolute;
-    top: 150px;
-    left: 50px;
-    width: 300px;
-    font-size: 25px;
-    font-weight: 300;
-    color: aliceblue;
-
-
+/* --- КАТЕГОРИИ --- */
+.categories {
+    margin: 40px 0;
 }
 
+.categories div {
+    display: inline-block;
+    background: #f2f2f2;
+    border-radius: 50px;
+    padding: 10px 25px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border: 1px solid transparent;
+    transition: all 400ms ease;
+}
+
+.categories div:hover {
+    background: #e5e5e5;
+    border-color: silver;
+    transform: translateY(-2px);
+}
+
+/* --- СЕТКА ТОВАРОВ (MAIN) --- */
 main {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
 }
 
 main .item {
-    width: 31%; /* Три товара в ряд */
-    margin-bottom: 50px;
     background: #f5f5f5;
-    border-radius: 10px;
+    border-radius: 20px;
+    overflow: hidden;
     position: relative;
-    transition: transform 300ms ease;
+    transition: transform 400ms ease, box-shadow 400ms ease;
+}
+
+main .item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 main .item img {
     width: 100%;
     height: 350px;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    transition: transform 500ms ease;
-
+    cursor: pointer;
 }
-
-main .item img:hover {
-    transform: scale(1.05);
-
-
-
-}
-
 
 main h2, main p, main b {
-    margin: 10px 20px;
-    color: #333;
+    margin: 15px 20px;
 }
 
 main b {
-    color: rgb(0, 141, 42);
-    font-weight: 600;
-
+    color: #27ae60;
+    font-size: 20px;
 }
 
-main .add-to-cart {
+main .add-to-cart, .full-item .add-to-cart {
     position: absolute;
     right: 20px;
     bottom: 20px;
     background: #ff8888;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     text-align: center;
-    line-height: 35px;
-    color: #f0f0f0;
+    line-height: 40px;
+    color: #fff;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 20px;
     font-weight: 600;
-    transition: transform 350ms ease;
-
-
+    transition: transform 300ms ease;
 }
 
-main .add-to-cart:hover {
-    transform: scale(1.2) translateY(-2px);
-
+main .add-to-cart:hover, .full-item .add-to-cart:hover {
+    transform: scale(1.15);
 }
 
+/* --- МОДАЛЬНОЕ ОКНО (SHOW FULL ITEM) --- */
+.full-item {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px); /* Размытие заднего фона */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.full-item > div {
+    width: 600px;
+    background: #fff;
+    border-radius: 25px;
+    position: relative;
+    padding-bottom: 30px;
+    animation: openModal 0.4s ease-out;
+}
+
+@keyframes openModal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.full-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 25px 25px 0 0;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 35px;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* --- ФУТЕР --- */
 footer {
     text-align: center;
-    margin-top: 100px;
+    padding: 50px 0;
+    color: #999;
 }
 
-
-@media (max-width: 900px) {
-    main .item {
-        width: 48%; /* На планшетах 2 товара в ряд */
+/* --- АДАПТИВНОСТЬ --- */
+@media (max-width: 800px) {
+    .header-top {
+        flex-direction: column;
     }
-}
-
-@media (max-width: 600px) {
-    main .item {
-        width: 100%; /* На телефонах 1 товар на весь экран */
+    header ul.nav {
+        margin-top: 20px;
+    }
+    .full-item > div {
+        width: 90%;
     }
 }
